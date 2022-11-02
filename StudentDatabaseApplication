@@ -1,0 +1,81 @@
+package studentdatabase;
+
+import java.util.Scanner;
+
+import javax.management.loading.PrivateClassLoader;
+
+public class student1 {
+
+	private String firstName;
+	private String lastName;
+	private int gradeyear;
+	private String studentID;
+	private String courses = null;
+	private int tuitionbalence;
+	private int costOfcource = 600;
+	private static int  id = 1000; 
+
+
+	// construct : prompt user to student name and year.
+
+	public student1() {
+		Scanner in = new Scanner(System.in);
+		System.out.print("Enter the firstName: ");
+		this.firstName = in.nextLine();
+
+		System.out.print("Enter the lastName: ");
+		this.lastName = in.nextLine();
+
+		System.out.print("1 - Freshman\n2 - Sophmore\n3 - Junior\n4 - Senior\n Enter the Student class Level ");
+		this.gradeyear = in.nextInt();
+		setstudentID();
+	}
+	// generate an ID
+	void setstudentID() {
+		id++;
+		this.studentID = gradeyear + " " + id;
+
+	}
+
+	// enroll  a course
+	public void enroll() {
+
+		//get inside a loop ,,
+		do {
+			System.out.print("Enter course to enroll(Q to quit): ");
+			Scanner in = new Scanner(System.in);
+			String course = in.nextLine();
+			if(!course.equals("Q")){
+				courses = courses +"\n" + course;
+				tuitionbalence = tuitionbalence + costOfcource;
+			}else
+			{
+				break;
+			}
+		} while(1 != 0);
+	}
+
+
+	// view balance 
+	public void viewBalence() {
+		System.out.println("Your balence : Rs. "+ tuitionbalence);
+	}
+	//pay tuition 
+	public void payTuition() {
+		viewBalence();
+		System.out.print("Enter your payment:  Rs.  ");
+		Scanner in = new Scanner(System.in);
+		int payment = in.nextInt();
+		tuitionbalence  = tuitionbalence- payment;
+		System.out.println("Thank you for your payment  of Rs. " + payment);
+		viewBalence();
+	}
+	// show status 
+	public String showInfo() {
+		return "Name : " + firstName + " " + lastName +
+				"\nGrade Level: " + " " + gradeyear +
+				"\nStudent ID: " + " " + studentID+
+				"\nCourses Enrolled : " + courses +
+				"\nBalence: Rs " + tuitionbalence;
+	}
+}
